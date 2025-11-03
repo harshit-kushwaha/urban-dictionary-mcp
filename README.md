@@ -1,199 +1,75 @@
 # Urban Dictionary MCP Server
 
-A [Model Context Protocol](https://modelcontextprotocol.io) server that provides access to Urban Dictionary's slang definitions through a chat-based interface with Claude.
+MCP server exposing Urban Dictionary slang definitions for agentic systems (Claude Desktop & other MCP clients).
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue.svg)](https://www.typescriptlang.org/)
+[![NPM Version](https://img.shields.io/npm/v/urban-dictionary-mcp.svg)](https://www.npmjs.com/package/urban-dictionary-mcp) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Features
+## Install & Run
 
-- 🔍 **Define Slang Terms** - Look up definitions for any slang term or phrase
-- 🎲 **Random Words** - Discover new slang with random word lookup
-- 👍 **Popularity Sorted** - Definitions sorted by community votes
-- 📝 **Rich Formatting** - Clean, readable output with examples and metadata
-- ⚡ **Fast & Reliable** - Built with TypeScript and proper error handling
+Requires Node 20+.
 
-## Installation
+Quick test:
 
-### Prerequisites
-
-- Node.js 18 or higher
-- npm or yarn
-- Claude Desktop App
-
-### Setup
-
-1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/urban-dictionary-mcp.git
-cd urban-dictionary-mcp
+npx urban-dictionary-mcp
 ```
 
-2. Install dependencies:
+Global install:
+
 ```bash
-npm install
+npm install -g urban-dictionary-mcp
+urban-dictionary-mcp
 ```
 
-3. Build the project:
-```bash
-npm run build
-```
+## Claude Desktop Configuration
 
-## Configuration
+Add to config file (`macOS: ~/Library/Application Support/Claude/claude_desktop_config.json`, `Windows: %APPDATA%\Claude\claude_desktop_config.json`):
 
-### Claude Desktop
-
-Add the server to your Claude Desktop configuration:
-
-**macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
-
-**Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
+Using npx (recommended):
 
 ```json
 {
   "mcpServers": {
-    "urbandictionary": {
-      "command": "node",
-      "args": [
-        "/absolute/path/to/urban-dictionary-mcp/dist/index.js"
-      ]
-    }
+    "urbandictionary": { "command": "npx", "args": ["urban-dictionary-mcp"] }
   }
 }
 ```
 
-Replace `/absolute/path/to/urban-dictionary-mcp` with the actual path to your installation.
+Global installation:
 
-### Restart Claude Desktop
-
-After updating the configuration, completely restart Claude Desktop for the changes to take effect.
-
-## Usage
-
-Once configured, you can use the MCP server through Claude with natural language:
-
-```
-You: What does "rizz" mean?
-Claude: [Uses define_slang tool to fetch definitions]
-
-You: Give me a random slang word
-Claude: [Uses random_word tool to get a random term]
-
-You: Look up "ghosting" and show me 5 definitions
-Claude: [Fetches 5 definitions for "ghosting"]
-```
-
-## Available Tools
-
-### `define_slang`
-
-Look up definitions for a slang term or phrase.
-
-**Parameters:**
-- `term` (string, required): The slang term to look up
-- `limit` (number, optional): Maximum number of definitions to return (default: 3, max: 10)
-
-**Example:**
-```typescript
+```json
 {
-  "term": "bussin",
-  "limit": 5
+  "mcpServers": {
+    "urbandictionary": { "command": "urban-dictionary-mcp" }
+  }
 }
 ```
 
-### `random_word`
+Restart Claude Desktop after changes.
 
-Get a random slang word and its definition.
+## Tools
 
-**Parameters:** None
+`define_slang` – lookup definitions.
 
-## Project Structure
+Parameters:
 
-```
-urban-dictionary-mcp/
-├── src/
-│   ├── index.ts              # Main entry point
-│   ├── server.ts             # Server initialization
-│   ├── tools/
-│   │   ├── index.ts          # Tool exports
-│   │   ├── definitions.ts    # Tool definitions
-│   │   └── handlers.ts       # Tool request handlers
-│   ├── services/
-│   │   └── urbanDictionary.ts # API service layer
-│   ├── types/
-│   │   └── index.ts          # TypeScript type definitions
-│   └── utils/
-│       └── formatters.ts     # Formatting utilities
-├── dist/                     # Compiled JavaScript (generated)
-├── package.json
-├── tsconfig.json
-└── README.md
+```text
+term (string, required)
+limit (number, optional, default 3, max 10)
 ```
 
-## Development
+`random_word` – random slang + definition (no parameters).
 
-### Building
+## Example Interaction
 
-```bash
-npm run build
+```text
+You: What does "rizz" mean?
+You: Give me a random slang word
 ```
 
-### Watch Mode
+## Links & License
 
-For development with auto-rebuild:
+GitHub: [harshit-kushwaha/urban-dictionary-mcp](https://github.com/harshit-kushwaha/urban-dictionary-mcp)
+Issues: [Report Issues](https://github.com/harshit-kushwaha/urban-dictionary-mcp/issues)
 
-```bash
-npm run watch
-```
-
-### Code Organization
-
-The codebase follows a modular architecture:
-
-- **`tools/`** - MCP tool definitions and handlers
-- **`services/`** - External API interactions
-- **`types/`** - TypeScript interfaces and types
-- **`utils/`** - Utility functions and formatters
-- **`server.ts`** - MCP server setup and configuration
-- **`index.ts`** - Application entry point
-
-## Error Handling
-
-The server includes comprehensive error handling:
-
-- API request failures with timeout protection
-- Input validation
-- Graceful degradation for missing data
-- Detailed error messages for debugging
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-- Built with the [Model Context Protocol SDK](https://github.com/modelcontextprotocol)
-- Data provided by [Urban Dictionary API](https://urbandictionary.com)
-- Created as a learning project for MCP server development
-
-## Disclaimer
-
-This project is not affiliated with or endorsed by Urban Dictionary. Content is provided by the Urban Dictionary community and may contain profanity or offensive material.
-
-## Support
-
-For issues, questions, or contributions, please open an issue on GitHub.
-
----
-
-**Note**: Urban Dictionary content is user-generated and may not always be accurate or appropriate. Use discretion when relying on definitions.
+MIT License. Urban Dictionary community content may contain profanity or offensive material.
