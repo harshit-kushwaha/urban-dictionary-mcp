@@ -1,6 +1,6 @@
 {
   "name": "urban-dictionary-mcp",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "MCP server for Urban Dictionary slang lookup with chat-based interface",
   "type": "module",
   "main": "dist/index.js",
