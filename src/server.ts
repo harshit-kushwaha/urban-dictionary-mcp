@@ -8,12 +8,13 @@ import {
   ListToolsRequestSchema,
 } from "@modelcontextprotocol/sdk/types.js";
 import { ALL_TOOLS, handleToolCall } from "./tools/index.js";
+import packageJson from "../package.json" with { type: "json" };
 
 /**
  * Server metadata
  */
 const SERVER_NAME = "urban-dictionary-mcp";
-const SERVER_VERSION = "1.0.1";
+const SERVER_VERSION = packageJson.version;
 
 /**
  * Creates and configures the MCP server instance
