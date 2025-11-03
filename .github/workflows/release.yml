@@ -1,0 +1,61 @@
+name: Release and Publish
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Configure Git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+      - name: Check if version bump needed
+        id: check
+        run: |
+          if git log -1 --pretty=%B | grep -q "chore: bump version"; then
+            echo "skip=true" >> $GITHUB_OUTPUT
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Bump version and push
+        if: steps.check.outputs.skip == 'false'
+        run: |
+          npm version patch -m "chore: bump version to %s"
+          git push
+          git push --tags
+
+      - name: Install dependencies
+        if: steps.check.outputs.skip == 'false'
+        run: npm ci
+
+      - name: Build project
+        if: steps.check.outputs.skip == 'false'
+        run: npm run build
+
+      - name: Make executable
+        if: steps.check.outputs.skip == 'false'
+        run: chmod +x dist/index.js
+
+      - name: Publish to NPM
+        if: steps.check.outputs.skip == 'false'
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
