@@ -23,7 +23,11 @@ urban-dictionary-mcp
 
 ## Claude Desktop Configuration
 
-Add to config file (`macOS: ~/Library/Application Support/Claude/claude_desktop_config.json`, `Windows: %APPDATA%\Claude\claude_desktop_config.json`):
+Add to config file
+
+**MacOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
+
+**Windows**: `%APPDATA%\Claude\claude_desktop_config.json`:
 
 Using npx (recommended):
 
@@ -70,6 +74,7 @@ You: Give me a random slang word
 ## Links & License
 
 GitHub: [harshit-kushwaha/urban-dictionary-mcp](https://github.com/harshit-kushwaha/urban-dictionary-mcp)
+
 Issues: [Report Issues](https://github.com/harshit-kushwaha/urban-dictionary-mcp/issues)
 
 MIT License. Urban Dictionary community content may contain profanity or offensive material.
