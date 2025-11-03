@@ -1,0 +1,35 @@
+{
+  "name": "urbandictionary-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for Urban Dictionary slang lookup with chat-based interface",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "urbandictionary-mcp": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "prepare": "npm run build",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "urban-dictionary",
+    "slang",
+    "chat-interface",
+    "claude",
+    "ai-tools"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.20.2",
+    "axios": "^1.13.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.9.2",
+    "typescript": "^5.9.3"
+  }
+}
