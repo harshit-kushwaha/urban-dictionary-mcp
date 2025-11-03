@@ -25,8 +25,8 @@ A [Model Context Protocol](https://modelcontextprotocol.io) server that provides
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/urbandictionary-mcp.git
-cd urbandictionary-mcp
+git clone https://github.com/yourusername/urban-dictionary-mcp.git
+cd urban-dictionary-mcp
 ```
 
 2. Install dependencies:
@@ -55,14 +55,14 @@ Add the server to your Claude Desktop configuration:
     "urbandictionary": {
       "command": "node",
       "args": [
-        "/absolute/path/to/urbandictionary-mcp/dist/index.js"
+        "/absolute/path/to/urban-dictionary-mcp/dist/index.js"
       ]
     }
   }
 }
 ```
 
-Replace `/absolute/path/to/urbandictionary-mcp` with the actual path to your installation.
+Replace `/absolute/path/to/urban-dictionary-mcp` with the actual path to your installation.
 
 ### Restart Claude Desktop
 
@@ -110,7 +110,7 @@ Get a random slang word and its definition.
 ## Project Structure
 
 ```
-urbandictionary-mcp/
+urban-dictionary-mcp/
 ├── src/
 │   ├── index.ts              # Main entry point
 │   ├── server.ts             # Server initialization

@@ -12,8 +12,8 @@ import { ALL_TOOLS, handleToolCall } from "./tools/index.js";
 /**
  * Server metadata
  */
-const SERVER_NAME = "urbandictionary-mcp";
-const SERVER_VERSION = "1.0.0";
+const SERVER_NAME = "urban-dictionary-mcp";
+const SERVER_VERSION = "1.0.1";
 
 /**
  * Creates and configures the MCP server instance

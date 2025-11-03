@@ -1,11 +1,16 @@
 {
-  "name": "urbandictionary-mcp",
-  "version": "1.0.0",
+  "name": "urban-dictionary-mcp",
+  "version": "1.0.1",
   "description": "MCP server for Urban Dictionary slang lookup with chat-based interface",
   "type": "module",
   "main": "dist/index.js",
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "LICENSE"
+  ],
   "bin": {
-    "urbandictionary-mcp": "dist/index.js"
+    "urban-dictionary-mcp": "dist/index.js"
   },
   "scripts": {
     "build": "tsc",
@@ -22,8 +27,8 @@
     "claude",
     "ai-tools"
   ],
-  "author": "",
-  "license": "ISC",
+  "author": "Harshit Kushwaha",
+  "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.20.2",
     "axios": "^1.13.1"
