@@ -39,8 +39,10 @@ jobs:
 
       - name: Bump version and push
         if: steps.check.outputs.skip == 'false'
+        id: version
         run: |
-          npm version patch -m "chore: bump version to %s"
+          NEW_VERSION=$(npm version patch -m "chore: bump version to %s")
+          echo "new-version=${NEW_VERSION#v}" >> $GITHUB_OUTPUT
           git push
           git push --tags
 
@@ -55,6 +57,27 @@ jobs:
       - name: Make executable
         if: steps.check.outputs.skip == 'false'
         run: chmod +x dist/index.js
+
+      - name: Create GitHub Release
+        if: steps.check.outputs.skip == 'false'
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ steps.version.outputs.new-version }}
+          release_name: Release v${{ steps.version.outputs.new-version }}
+          body: |
+            🚀 **Auto-generated release for version ${{ steps.version.outputs.new-version }}**
+            
+            ## Changes
+            This release includes the latest changes pushed to the main branch.
+            
+            ## Installation
+            ```bash
+            npm install urban-dictionary-mcp@${{ steps.version.outputs.new-version }}
+            ```
+          draft: false
+          prerelease: false
 
       - name: Publish to NPM
         if: steps.check.outputs.skip == 'false'
